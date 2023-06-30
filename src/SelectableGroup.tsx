@@ -340,6 +340,11 @@ export class SelectableGroup extends Component<TSelectableGroupProps> {
   }
 
   updateSelectBox = (event: Event) => {
+    console.log({
+      element: event.target,
+      message: 'Mouse move called',
+      eventType: event.type,
+    })
     const evt = castTouchToMouseEvent(event)
     this.updateContainerScroll(evt)
 
@@ -504,6 +509,12 @@ export class SelectableGroup extends Component<TSelectableGroupProps> {
   }
 
   mouseDown = (e: Event) => {
+    console.log({
+      element: e.target,
+      message: 'Mouse down called',
+      eventType: e.type,
+      mouseMoved: this.mouseMoved
+    })
     const isNotLeftButtonClick =
       !e.type.includes('touch') &&
       !detectMouseButton(e as any, 1, {
@@ -601,6 +612,13 @@ export class SelectableGroup extends Component<TSelectableGroupProps> {
 
     if (!this.mouseMoved && isNodeInRoot(evt.target as HTMLElement, this.selectableGroup!)) {
       this.handleClick(evt, pageY, pageX)
+      console.log({
+        element: evt.target,
+        keyCode: evt.which,
+        message: 'Mouse not moved, Mouse up called',
+        eventType: evt.type,
+        mouseMoved: this.mouseMoved
+      })
     } else {
       for (const item of this.selectingItems.values()) {
         item.setState({ isSelected: true, isSelecting: false })
@@ -619,6 +637,13 @@ export class SelectableGroup extends Component<TSelectableGroupProps> {
         height: 0,
       })
       this.props.onSelectionFinish!([...this.selectedItems])
+      console.log({
+        element: evt.target,
+        keyCode: evt.which,
+        message: 'Mouse moved, Mouse up called',
+        eventType: evt.type,
+        mouseMoved: this.mouseMoved
+      })
     }
 
     this.toggleSelectionMode()
