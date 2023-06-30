@@ -29,11 +29,6 @@
       "yarn lint:basic"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "bugs": {
     "url": "https://github.com/valerybugakov/react-selectable-fast/issues"
   },
